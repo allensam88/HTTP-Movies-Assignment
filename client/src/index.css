@@ -107,3 +107,51 @@ body {
   color: red;
   text-align: center;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label-input-div {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    text-align: right;    
+    font-size: 15px;    
+    line-height: 25px;
+    border: 1px transparent;
+    border-radius: 5px;
+    width: 200px;
+    margin: 10px auto;
+    padding-right: 5px;
+}
+
+input {
+    font-size: 15px;    
+    line-height: 25px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    width: 250px;
+    margin: 10px auto;
+    padding-left: 5px;
+}
+
+button {
+    width: 100px;
+    margin: 0 auto;
+    width: 75px;
+    border: 1px solid grey;
+    padding: 5px 10px;
+    background-color: lightseagreen;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: gray;
+}

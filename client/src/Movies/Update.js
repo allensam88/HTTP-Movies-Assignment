@@ -24,17 +24,14 @@ const Update = props => {
         if (event.target.name === 'metascore') {
             value = parseInt(value, 10);
         } 
-        // else if (event.target.name === 'stars') {
-        //     const updatedStars = updatedMovie.stars.filter((item) => item !== star)
-            
-        // }
         setUpdatedMovie({ ...updatedMovie, [event.target.name]: event.target.value });
     }
 
-    // const handleStarChange = (event, star) => {
-        
-    //     setUpdatedMovie({ ...updatedMovie, stars: [...updatedMovie.stars, updatedStars]})
-    // }
+    const handleStar = (event, index) => {
+        const slicedStars = updatedMovie.stars.slice();
+        slicedStars[index] = event.target.value;
+        setUpdatedMovie({ ...updatedMovie, stars: slicedStars})
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,43 +40,57 @@ const Update = props => {
             .then(res => {
                 console.log(res)
                 props.history.push('/');
+                alert(`Successfully updated ${updatedMovie.title}`);
             })
             .catch(err => console.log(err));
-        alert(`Successfully updated ${updatedMovie.title}`);
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='title'
-                    value={updatedMovie.title}
-                    onChange={handleChange}
-                    autoComplete='off'
-                />
-                <input
-                    type='text'
-                    name='director'
-                    value={updatedMovie.director}
-                    onChange={handleChange}
-                    autoComplete='off'
-                />
-                <input
-                    type='number'
-                    name='metascore'
-                    value={updatedMovie.metascore}
-                    onChange={handleChange}
-                    autoComplete='off'
-                />
-                {updatedMovie.stars.map((star) => (<input
-                    key={star}
-                    type='text'
-                    name='stars'
-                    value={star}
-                    onChange={handleChange}
-                    autoComplete='off'
-                />))}
+                <div className='label-input-div'>
+                    <label htmlFor='title'>Title: </label>
+                    <input
+                        type='text'
+                        name='title'
+                        value={updatedMovie.title}
+                        onChange={handleChange}
+                        autoComplete='off'
+                    />
+                </div>
+                <div className='label-input-div'>
+                    <label htmlFor='director'>Director: </label>
+                    <input
+                        type='text'
+                        name='director'
+                        value={updatedMovie.director}
+                        onChange={handleChange}
+                        autoComplete='off'
+                    />
+                </div>
+                <div className='label-input-div'>
+                    <label htmlFor='metascore'>MetaScore: </label>
+                    <input
+                        type='text'
+                        name='metascore'
+                        value={updatedMovie.metascore}
+                        onChange={handleChange}
+                        autoComplete='off'
+                    />
+                </div>
+                {updatedMovie.stars.map((star, index) => (
+                    <div className='label-input-div'>
+                        <label htmlFor='star'>Star: </label>
+                        <input
+                            key={index}
+                            type='text'
+                            name='star'
+                            value={star}
+                            onChange={(event) => handleStar(event, index)}
+                            autoComplete='off'
+                        />
+                    </div>
+                ))}
                 <button>Update</button>
             </form>
         </div>
